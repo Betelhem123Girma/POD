@@ -11,7 +11,7 @@ const router = express.Router();
  * @apiName CreateUser
  * @apiGroup User
  * @apiVersion 0.0.1
- *S
+ *
  * @apiParam {String} email The email of the User.
  * @apiParam {String} password The password of the User.
  *
@@ -37,7 +37,7 @@ const router = express.Router();
  * 		date_modified: 2017-02-13T17:19:08.404Z,
  * 	 }
  *
- */
+ */1
 router.post('/', Users.createUser);
 
 /**
