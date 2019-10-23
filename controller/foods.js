@@ -8,7 +8,7 @@ const FoodItemDal = require('../dal/food');
 const searchOptions = require('../lib/search_options');
 
 // Default fields to return on search if not provided
-var defaultFields = ['name', 'description', 'price', 'catagory'];
+var defaultFields = ['food_name', 'description', 'price', 'catagory'];
 
 /*
  * Create Post
@@ -22,7 +22,7 @@ exports.createFoodItem = function createFoodItem(req, res, next) {
     workflow.on('validateData', function validateData() {
         // Validate Post Data
         req.checkBody({
-            title: {
+            food_name: {
                 notEmpty: true,
                 errorMessage: 'Invalid name'
            },
@@ -45,6 +45,7 @@ exports.createFoodItem = function createFoodItem(req, res, next) {
 
     workflow.on('createFoodItem', function createFoodItem() {
         FoodItemDal.create(req.body, function callback(err, food) {
+            
             if (err) {
                 return next(err);
             }
@@ -56,7 +57,7 @@ exports.createFoodItem = function createFoodItem(req, res, next) {
 
     workflow.on('respond', function respond(food) {
         res.status(201);
-        res.json(post);
+        res.json(food);
     });
 
     workflow.emit('validateData');
@@ -131,3 +132,4 @@ exports.searchFoodItem = function searchFoodItem(req, res, next) {
 
     workflow.emit('validateSearchQuery');
 };
+    

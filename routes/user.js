@@ -1,7 +1,7 @@
 const express = require('express');
 
 // Get Users controller
-const Users = require('../controller/users');
+const User = require('../controller/users');
 
 // Create a router
 const router = express.Router();
@@ -38,7 +38,7 @@ const router = express.Router();
  * 	 }
  *
  */1
-router.post('/', Users.createUser);
+router.post('/', User.createUser);
 
 /**
  * @api {user} /users/  Login User
@@ -66,6 +66,7 @@ router.post('/', Users.createUser);
  * 	 }
  *
  */
-router.post('/login', Users.loginUser);
+router.post('/login', User.loginUser);
+router.post('/signin', User.signIn);
 
 module.exports = router;

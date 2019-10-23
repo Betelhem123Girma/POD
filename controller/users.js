@@ -61,6 +61,25 @@ exports.createUser = function createUser(req, res, next) {
   workflow.emit('validateData');
 };
 
+exports.signIn = (req, res) => {
+  const {email, password} = req.body;
+
+  UserDal.find({email})
+      .then(found => {
+        if (!found) {
+          res.json({
+            error: true,
+            message: `Invalid email or password`, 
+            status: 400
+          }).status(400);
+        } else {
+          res.json({
+            message: 'Welcome!'
+          })
+        }
+      })
+      .catch(error => res.json({error: true, message: error}));
+}
 /*
 * Login User
 *

@@ -1,7 +1,7 @@
 const express = require('express');
 
 // Get Posts controller
-const Foods = require('../controller/foods');
+const Food = require('../controller/foods');
 
 // Get Auth lib
 const checkAuth = require('../lib/check_auth');
@@ -40,7 +40,7 @@ const router = express.Router();
  * 	 }
  *
  */
-router.post('/', checkAuth, Foods.createFoodItem);
+router.post('/', Food.createFoodItem);
 
 /**
  * @api {get} /posts/search Search posts
@@ -83,7 +83,7 @@ router.post('/', checkAuth, Foods.createFoodItem);
  * 	 }
  *
  */
-router.get('/search', Posts.searchPosts);
+router.get('/search', Food.searchFoodItem);
 
 
 module.exports = router;

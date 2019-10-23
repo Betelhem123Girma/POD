@@ -64,11 +64,11 @@ exports.get = function get(query, cb) {
 exports.search = function search(options, cb){
     console.log('Searching a collection of foodItems');
 
-    Post.find(options.filter, options.fields)
+    Food.find(options.filter, options.fields)
         .sort(options.sort)
         .limit(options.limit)
         .skip(options.limit * (options.page - 1))
-        .exec(function searchfoodItem(err, posts) {
+        .exec(function searchfoodItem(err, foods) {
             if(err) {
                 return cb(err);
             }

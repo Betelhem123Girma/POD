@@ -1,5 +1,8 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const Promise = require('bluebird');
+mongoose.Promise = Promise;
+
 const bodyParser = require('body-parser');
 const validator = require('express-validator');
 

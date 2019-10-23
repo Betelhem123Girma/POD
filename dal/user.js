@@ -30,7 +30,7 @@ exports.create = function create(userData, cb) {
       userData.password = hash;
 
       let userModel = new User(userData);
-
+      
       userModel.save(function saveUser(err, data) {
         if (err) {
           return cb(err);
@@ -64,3 +64,5 @@ exports.get = function get(query, cb) {
     cb(null, user || {});
   });
 };
+
+exports.find = query => User.find(query).exec();
