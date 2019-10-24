@@ -1,0 +1,1 @@
+exports.data = (payload, res) => res.status(200).json(payload)

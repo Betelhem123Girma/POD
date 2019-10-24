@@ -64,7 +64,7 @@ exports.get = function get(query, cb) {
 exports.search = function search(options, cb){
     console.log('Searching a collection of foodItems');
 
-    Food.find(options.filter, options.fields)
+    Food.find(options.filter, options.fields) 
         .sort(options.sort)
         .limit(options.limit)
         .skip(options.limit * (options.page - 1))

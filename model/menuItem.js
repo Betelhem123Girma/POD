@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-var catagory=["vagan","non-vegan"]
+
 // Define User attributes
 const MenuItemSchema = mongoose.Schema({
   menuItem_name:{type: String, required: true},

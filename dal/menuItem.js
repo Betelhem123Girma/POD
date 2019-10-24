@@ -1,14 +1,6 @@
 var menuItemModel=require('../model/menuItem')
 
-// exports.findMenuItems=(query,cb)=>{
-//     // menuItemModel.find(query).exec(function(err,menuItem) {
-//     //     if (err) {
-//     //       return cb(err);
-//     //     }
-//     //     cb(null, menuItem || {});
-//     //   });
-//     console.log("I am in Dal")
-//     };
+
 exports.findMenuItems = query => menuItemModel.find(query).exec();
 exports.create = function create(foodItemData, cb) {
     console.log('creating a new foodItem');
@@ -24,7 +16,21 @@ exports.create = function create(foodItemData, cb) {
             return cb(err);
         }
         
-            cb( data);
+            cb(null, data);
         });
   
   };
+  exports.search = function search(options, cb){
+    console.log('Searching a collection of foodItems');
+
+    menuItemModel.find(options.filter, options.fields) 
+        .sort(options.sort)
+        .limit(options.limit)
+        .skip(options.limit * (options.page - 1))
+        .exec(function searchfoodItem(err, foods) {
+            if(err) {
+                return cb(err);
+            }
+            return cb(null, foods);
+        })
+}
