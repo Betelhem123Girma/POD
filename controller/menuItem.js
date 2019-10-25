@@ -1,4 +1,5 @@
 var menuItemDal=require('../dal/menuItem')
+
 var result=require('../util/res')
 var events=require('events')
 // Get Serach options
@@ -93,11 +94,4 @@ exports.findMenuItems=(req,res)=>{
     
         workflow.emit('validateSearchQuery');
     };
-//order menuitem
-exports.orderMenuItem=(req,res)=>{
-    
-    return menuItemDal.findMenuItems({status:req.body.status})
-       .then(menuItems=>{
-           result.data(menuItems,res)
-       })
-}
+//menu item order
