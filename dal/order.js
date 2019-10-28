@@ -3,20 +3,18 @@ exports.addOrder=function addOrder(orderData,cb){
     let now=new Date()
 
     orderData.order_time = now.toISOString();
+    
     let orderModel=new Order(orderData)
    
     orderModel.save(function saveOrder(err, data) {
         if (err) {
           return cb(err);
         }
-        // exports.get({ _id: data._id }, function(err, order) {
-        //   if (err) {
-        //     return cb(err);
-        //   }
-        //   cb(null, order);
-        // });
+       cb(null,data)
+       
       });
 }
+exports.findOrders = query => Order.find(query).exec();
 // exports.getOrders=(res,req)=>{
 //     orderModel.getOrders((err,data)=>{
 //         if(err){

@@ -88,7 +88,7 @@ exports.findMenuItems=(req,res)=>{
             res.status(200);
             res.json({
                 "options": opts,
-                "result":  foods
+                "result":  foodsher
             });
         });
     

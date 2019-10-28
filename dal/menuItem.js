@@ -2,16 +2,16 @@ var menuItemModel=require('../model/menuItem')
 
 
 exports.findMenuItems = query => menuItemModel.find(query).exec();
-exports.create = function create(foodItemData, cb) {
+exports.create = function create(menuItemData, cb) {
     console.log('creating a new foodItem');
     // Create Post
     var now = new Date();
-    foodItemData.date_created = now.toISOString();
-    foodItemData.date_modified = now.toISOString();
+    menuItemData.date_created = now.toISOString();
+    menuItemData.date_modified = now.toISOString();
   
-    var newMenuItemModel=new menuItemModel(foodItemData)
+    var newMenuItemModel=new menuItemModel(menuItemData)
   
-    newMenuItemModel.save(function saveFoodItem(err, data) {
+    newMenuItemModel.save(function saveMenuItem(err, data) {
         if (err) {
             return cb(err);
         }
