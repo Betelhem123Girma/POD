@@ -4,9 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node ./bin/www"
-    
    
+    "start": "nodemon app.js"
   },
   "engines": {
     "node": "12.9.1"
@@ -15,14 +14,18 @@
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^3.0.6",
+    "bcrypt-nodejs": "0.0.3",
     "bluebird": "^3.7.1",
     "express": "^4.17.1",
     "express-validator": "^5.3.1",
     "jsonwebtoken": "^8.5.1",
+    "moment": "^2.24.0",
     "mongodb": "^3.3.3",
     "mongoose": "^5.7.7",
+    "morgan": "^1.9.1",
     "node-gyp": "^6.0.0",
     "nodemon": "^1.19.4",
-    "validator": "^11.1.0"
+    "validator": "^11.1.0",
+    "winston": "^3.2.1"
   }
 }

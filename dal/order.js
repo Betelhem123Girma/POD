@@ -1,7 +1,7 @@
 var Order=require('../model/order')
 exports.addOrder=function addOrder(orderData,cb){
     let now=new Date()
-
+   
     orderData.order_time = now.toISOString();
     
     let orderModel=new Order(orderData)
@@ -14,7 +14,10 @@ exports.addOrder=function addOrder(orderData,cb){
        
       });
 }
+exports.deleteOrder=query=>Order.deleteMany(query);
 exports.findOrders = query => Order.find(query).exec();
+exports.findOrderById=query=>Order.findById(query);
+exports.findByUserId=query=>Order.findById(query);
 // exports.getOrders=(res,req)=>{
 //     orderModel.getOrders((err,data)=>{
 //         if(err){

@@ -64,5 +64,6 @@ exports.get = function get(query, cb) {
     cb(null, user || {});
   });
 };
-
+exports.findById=query=>User.findById(query);
 exports.find = query => User.find(query).exec();
+exports.findOne = query => User.findOne(query).exec();

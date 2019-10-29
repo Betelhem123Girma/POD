@@ -1,7 +1,8 @@
 var menuItemModel=require('../model/menuItem')
 
-
+exports.update = menuItemModel => menuItemModel.save();
 exports.findMenuItems = query => menuItemModel.find(query).exec();
+exports.findMenuItemById=query=>menuItemModel.findById(query);
 exports.create = function create(menuItemData, cb) {
     console.log('creating a new foodItem');
     // Create Post

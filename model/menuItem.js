@@ -4,8 +4,9 @@ const mongoose = require('mongoose');
 const MenuItemSchema = mongoose.Schema({
   menuItem_name:{type: String, required: true},
   price:{type:Number,required:true},
+  order:{type:mongoose.SchemaTypes.ObjectId,ref:'Order'},
   ingredient:{type:Array,required:true},
-  ordered:  {type:Boolean, required: true, default: false},
+ 
   rating:{type:Number,required:true,default:0},
   description:{type:String,required:true},
   catagory:{type:String,required:true},
