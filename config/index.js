@@ -1,6 +1,6 @@
 module.exports = {
     // HTTP PORT
-    HTTP_PORT: process.env.HTTP_PORT || 3000,
+    HTTP_PORT: process.env.PORT || 3000,
     // MongoDB URL
     MONGODB_URL:"mongodb+srv://user:root@cluster0-wijwl.mongodb.net/test?retryWrites=true&w=majority",
     //"mongodb://localhost/thePod", ,
