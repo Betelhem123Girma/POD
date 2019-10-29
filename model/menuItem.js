@@ -6,7 +6,6 @@ const MenuItemSchema = mongoose.Schema({
   price:{type:Number,required:true},
   order:{type:mongoose.SchemaTypes.ObjectId,ref:'Order'},
   ingredient:{type:Array,required:true},
- 
   rating:{type:Number,required:true,default:0},
   description:{type:String,required:true},
   catagory:{type:String,required:true},
