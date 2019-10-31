@@ -60,29 +60,6 @@ exports.createUser = function createUser(req, res, next) {
 
   workflow.emit('validateData');
 };
-
-exports.signIn = (req, res) => {
-  const {email, password} = req.body;
-
-  UserDal.find({email})
-      .then(found => {
-        if (!found) {
-          res.json({
-            error: true,
-            message: `Invalid email or password`, 
-            status: 400
-          }).status(400);
-        } else {
-          
-          res.json({
-            message: 'Welcome!'
-            
-          
-          })
-        }
-      })
-      .catch(error => res.json({error: true, message: error}));
-}
 /*
 * Login User
 *
@@ -90,56 +67,35 @@ exports.signIn = (req, res) => {
 *  2. Check User password match
 *  3. Respond
 */
-exports.loginUser = function loginUser(req, res, next) {
-  let workflow = new events.EventEmitter();
 
-  workflow.on('checkUser', function checkUser() {
-    UserDal.get({ email: req.body.email }, function(err, user) {
-      if (err) {
-        return res.status(401).json({
-          message: 'Auth Failed'
-        });
-      }
+exports.login = (req, res) => {
+  const {email, password} = req.body;
 
-      workflow.emit('checkPassword', user);
-    })
-  });
-
-  workflow.on('checkPassword', function checkPassword(user) {
-    bcrypt.compare(req.body.password, user.password, (err, result) => {
-      if(err) {
-        return res.status(401).json({
-          message: 'Auth Failed'
-        });
-      }
-
-      if(result) {
-        workflow.emit('respond', user);
-      }
-
-      return res.status(401).json({
-        message: 'Auth Failed'
-      });
-    });
-  });
-
-  workflow.on('respond', function respond(user) {
-    const token = jwt.sign(
-      {
-        email: user.email,
-        userId: user._id
-      },
-      config.JWT_KEY,
-      {
-        expiresIn: "1h"
-      }
-    );
-    res.status(200);
-    res.json({
-      message: 'Auth Successful',
-      token: token
-    });
-  });
-
-  workflow.emit('checkUser');
-};
+  UserDal.find({email,password})
+      .then(found => {
+        if (!found) {
+          res.json({
+            error: true,
+            message: `Invalid email or password`, 
+            status: 400
+          }).status(400);
+        } 
+        const token = jwt.sign(
+          {
+            email: req.email,
+            userId: req._id
+          },
+          config.JWT_KEY,
+          {
+            expiresIn: "1h"
+          }
+        );
+          res.json({
+            message: 'Welcome!',
+            token:token
+          
+          })
+        }
+      )
+      .catch(error => res.json({error: true, message: error}));
+}

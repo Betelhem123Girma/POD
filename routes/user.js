@@ -38,7 +38,7 @@ const router = express.Router();
  * 	 }
  *
  */1
-router.post('/', User.createUser);
+router.post('/createAccount', User.createUser);
 
 /**
  * @api {user} /users/  Login User
@@ -66,7 +66,7 @@ router.post('/', User.createUser);
  * 	 }
  *
  */
-router.post('/login', User.loginUser);
-router.post('/signin', User.signIn);
+router.post('/login', User.login);
+
 
 module.exports = router;
