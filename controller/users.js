@@ -15,7 +15,7 @@ const validator=require('../validator/user-validator')
 *  1. Create User
 *  2. Respond
 */
-exports.createUser = function createUser(req, res) {
+exports.createUser = function createUser(req, res, next) {
   let workflow = new events.EventEmitter();
 
   workflow.on('validateData', function validateData() {
@@ -38,17 +38,10 @@ exports.createUser = function createUser(req, res) {
       res.json(validationErrors);
     } else {
       // On success emit the createUser event
-      workflow.emit('findUser');
+      workflow.emit('createUser');
     }
   });
-  workflow.on('findUser',function find(){
-    UserDal.find(req.body,function calback(err,user){
-      if(err){
-        return next(err)
-      }
-      workflow.emit('createUser')
-    } )
-  })
+
   workflow.on('createUser', function createUser() {
     UserDal.create(req.body, function callback(err, user) {
       if (err) {
@@ -66,7 +59,7 @@ exports.createUser = function createUser(req, res) {
   });
 
   workflow.emit('validateData');
-} 
+};
 /*
 * Login User
 *
