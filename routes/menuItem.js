@@ -1,8 +1,26 @@
 var router=require('express').Router()
 var menuItemController=require('../controller/menuItem');
 const checkAuth = require('../lib/check_auth');
+/**
+ * @api {get} /pod/menuItems    Get all menuItem with specific catagory
+ * @apiName GetMenuItems
+ * @apiGroup MenuItems
+ * @apiVersion 0.0.1
+ */
 router.get('/menuItems',menuItemController.findMenuItems)
+/**
+ * @api {user} /pod/addMenuItems  Add menuItems
+ * @apiName AddMenuItems
+ * @apiGroup MenuItems
+ * @apiVersion 0.0.1
+ */
 router.post('/addMenuItems',menuItemController.createMenuItem)
+/**
+ * @api {user} /pod/searchMenuItem    Search for menuItem
+ * @apiName SearchMenuItems
+ * @apiGroup MenuItems
+ * @apiVersion 0.0.1
+ */
 router.get('/searchMenuItem',checkAuth,menuItemController.searchMenuItem)
 
 // router.patch('/orderMenuItem',menuItemController.orderMenuItem)

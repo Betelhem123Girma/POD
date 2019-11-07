@@ -37,7 +37,7 @@ const router = express.Router();
  * 		date_modified: 2017-02-13T17:19:08.404Z,
  * 	 }
  *
- */1
+ */
 router.post('/createAccount', User.createUser);
 
 /**

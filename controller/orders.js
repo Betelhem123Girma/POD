@@ -37,6 +37,7 @@ const orderModel=require('../model/order')
                     message:"user not found"
                 })
             }
+            // return userDal.findAllergies(req.body.userId)
         }
             )
         menuItemDal.findMenuItemById(req.body.menuItemId)
@@ -46,12 +47,14 @@ const orderModel=require('../model/order')
                 message: "Product not found"
               });
             }
-           
+        
+        
             const order = new orderModel({
               user:req.body.userId,
               quantity: req.body.quantity,
               menuItems: req.body.menuItemId,
-              order_name:req.body.order_name
+              order_name:req.body.order_name,
+              users_allergies:userDal.findAllergies(req.body.userId)
             });
             return order.save()
           })
@@ -63,6 +66,7 @@ const orderModel=require('../model/order')
                 _id: result._id,
                 menuItems: result.menuItems,
                 quantity: result.quantity,
+                allergies:result.allergies
 
               },
               request: {

@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon app.js"
+    "start": "nodemon app.js",
+    "docs":"apidoc -i routes/ -o apidoc"
   },
   "engines": {
     "node": "12.9.1"
@@ -12,6 +13,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "apidoc": "^0.17.7",
     "bcrypt": "^3.0.6",
     "bcrypt-nodejs": "0.0.3",
     "bluebird": "^3.7.1",

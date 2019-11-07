@@ -49,7 +49,7 @@ exports.create = function create(userData, cb) {
 /**
  * get a User.
  *
- * @desc get a User with the given id from db
+ * @desc get a User with the given query from db
  *
  * @param {Object} query Query Object
  * @param {Function} cb Callback for once fetch is complete
@@ -67,3 +67,10 @@ exports.get = function get(query, cb) {
 exports.findById=query=>User.findById(query);
 exports.find = query => User.find(query).exec();
 exports.findOne = query => User.findOne(query).exec();
+exports.findAllergies=query=>(req,res)=>{
+   user.where(query).fetchAll({withRelated:['allergies']})
+   .then(function(allergies){
+     allergies=allergies.toJSON()
+     return allergies
+   })
+}

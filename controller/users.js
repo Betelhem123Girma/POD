@@ -2,20 +2,20 @@
 const events = require('events');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-
+const result = require('../util/res');
 // Get User DAL
 const UserDal = require('../dal/user');
 
 // Get Config file
 const config = require('../config');
-
+const validator=require('../validator/user-validator')
 /*
 * Create User
 *
 *  1. Create User
 *  2. Respond
 */
-exports.createUser = function createUser(req, res, next) {
+exports.createUser = function createUser(req, res) {
   let workflow = new events.EventEmitter();
 
   workflow.on('validateData', function validateData() {
@@ -38,10 +38,17 @@ exports.createUser = function createUser(req, res, next) {
       res.json(validationErrors);
     } else {
       // On success emit the createUser event
-      workflow.emit('createUser');
+      workflow.emit('findUser');
     }
   });
-
+  workflow.on('findUser',function find(){
+    UserDal.find(req.body,function calback(err,user){
+      if(err){
+        return next(err)
+      }
+      workflow.emit('createUser')
+    } )
+  })
   workflow.on('createUser', function createUser() {
     UserDal.create(req.body, function callback(err, user) {
       if (err) {
@@ -59,7 +66,7 @@ exports.createUser = function createUser(req, res, next) {
   });
 
   workflow.emit('validateData');
-};
+} 
 /*
 * Login User
 *
@@ -67,35 +74,77 @@ exports.createUser = function createUser(req, res, next) {
 *  2. Check User password match
 *  3. Respond
 */
-
 exports.login = (req, res) => {
-  const {email, password} = req.body;
-
-  UserDal.find({email,password})
+  let email, password, user;
+  validator.hasLoginFields(req)
+      .then(body => {
+          email = body.email;
+          password = body.password;
+          return UserDal.findOne({email});
+      })
       .then(found => {
-        if (!found) {
-          res.json({
-            error: true,
-            message: `Invalid email or password`, 
-            status: 400
-          }).status(400);
-        } 
-        const token = jwt.sign(
-          {
-            email: req.email,
-            userId: req._id
-          },
-          config.JWT_KEY,
-          {
-            expiresIn: "1h"
+          if (!found) {
+              return Promise.reject(
+                  result.reject(`Invalid username or password`)
+              );
+          } else {
+              user = found;
+              return bcrypt.compare(password, user.password);
           }
-        );
-          res.json({
-            message: 'Welcome!',
-            token:token
-          
-          })
-        }
-      )
-      .catch(error => res.json({error: true, message: error}));
-}
+      })
+      .then(valid => {
+          if (valid) {
+            const token = jwt.sign(
+                    {
+                      email: user.email,
+                      userId: user._id
+                    },
+                    config.JWT_KEY,
+                    {
+                      expiresIn: "1h"
+                    }
+                  );
+                  return token
+          } else {
+              return Promise.reject(
+                  result.reject(`Invalid username or password`)
+              );
+          }
+      })
+      .then(token => {
+          result.data({token, user}, res);
+      })
+      .catch(reject => result.errorReject(reject, res));
+};
+// exports.login = (req, res) => {
+//   const {email, password} = req.body;
+
+//   UserDal.find({email,password})
+//   .then (user=>{
+//     if(!user){
+//       console.log("user not found")
+//       res.json({
+        
+//         error: true,
+//         message: "Invaild password or username", 
+//         status: 400
+//       }).status(400);
+//     }
+//     const token = jwt.sign(
+//       {
+//         email: user.email,
+//         userId: user._id
+//       },
+//       config.JWT_KEY,
+//       {
+//         expiresIn: "1h"
+//       }
+//     );
+//     res.json({
+//       message:"Welcome to home",
+//       userId:user._id,
+//       token:token
+//     })
+//   })}
+
+
