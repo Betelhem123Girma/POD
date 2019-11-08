@@ -5,21 +5,31 @@ const menuItemDal=require('../dal/menuItem')
 const validator=require('../validator/validator')
 var result=require('../util/res')
 const orderModel=require('../model/order')
-    // exports.addOrder=(req,res,next)=> {
-    //     orderDal.addOrder(req.body, function callback(err, order) {
-        
-    //         if (err) {
-    //             return next(err);
-    //         }
+   exports.findOrder=(req,res)=>{
+    userDal.findById(req.body.userId)
+    .then(found=>{
+        if(!found){
+            return res.status(404).json({
+                message:"user not found"
+            })
+        }
+        // return userDal.findAllergies(req.body.userId)
+    }
+        )
+     orderDal.findById({user:req.params.userId})
+     .then(found=>{
+       if(!found){
+          return res.status(404).json({
+            message:"order not found"
+          })
+       }
+       else{
+         order=found
+         res.json(order)
+       }
 
-    //         // On Success emit create profile event
-    //         res.json(order);
-    //     });
-  
-
-    
-    // }  
-        
+     })
+   }   
     exports.findOrders=(req,res)=>{
     
         return orderDal.findOrders()
@@ -68,10 +78,6 @@ const orderModel=require('../model/order')
                 quantity: result.quantity,
                 allergies:result.allergies
 
-              },
-              request: {
-                type: "GET",
-                url: "http://localhost:3000/orders/" + result._id
               }
             });
           })
@@ -110,23 +116,4 @@ const orderModel=require('../model/order')
             });
           });
       };
-    //Find orders made by specific user
-    // exports.findOrdersWithUserId=(req,res,next)=>{
-    //     orderDal.findByUserId({_id:req.params.userId})
-    //     .then(found=>{
-    //         if(!found){
-    //             res.json({
-    //                 message:"order with specified user id doesnt exist"
-    //             })
-    //         }
-    //     }
-    //     .exec()
-    //     .then(orders => {
-    //       result.data(orders)
-    //     })
-    //     .catch(err => {
-    //       res.status(500).json({
-    //         error: err
-    //       });
-    //     });
-    // }
+  

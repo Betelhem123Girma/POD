@@ -7,21 +7,21 @@ const checkAuth = require('../lib/check_auth');
  * @apiGroup MenuItems
  * @apiVersion 0.0.1
  */
-router.get('/menuItems',menuItemController.findMenuItems)
+router.get('/menuItems',checkAuth,menuItemController.findMenuItems)
 /**
  * @api {user} /pod/addMenuItems  Add menuItems
  * @apiName AddMenuItems
  * @apiGroup MenuItems
  * @apiVersion 0.0.1
  */
-router.post('/addMenuItems',menuItemController.createMenuItem)
+router.post('/addMenuItems',checkAuth,menuItemController.createMenuItem)
 /**
  * @api {user} /pod/searchMenuItem    Search for menuItem
  * @apiName SearchMenuItems
  * @apiGroup MenuItems
  * @apiVersion 0.0.1
  */
-router.get('/searchMenuItem',checkAuth,menuItemController.searchMenuItem)
+router.get('/searchMenuItem',checkAuth,checkAuth,menuItemController.searchMenuItem)
 
 // router.patch('/orderMenuItem',menuItemController.orderMenuItem)
 // router.patch('/pay',menuItemController.payMenuItem)

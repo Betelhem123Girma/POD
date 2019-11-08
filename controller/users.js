@@ -109,35 +109,5 @@ exports.login = (req, res) => {
       })
       .catch(reject => result.errorReject(reject, res));
 };
-// exports.login = (req, res) => {
-//   const {email, password} = req.body;
-
-//   UserDal.find({email,password})
-//   .then (user=>{
-//     if(!user){
-//       console.log("user not found")
-//       res.json({
-        
-//         error: true,
-//         message: "Invaild password or username", 
-//         status: 400
-//       }).status(400);
-//     }
-//     const token = jwt.sign(
-//       {
-//         email: user.email,
-//         userId: user._id
-//       },
-//       config.JWT_KEY,
-//       {
-//         expiresIn: "1h"
-//       }
-//     );
-//     res.json({
-//       message:"Welcome to home",
-//       userId:user._id,
-//       token:token
-//     })
-//   })}
 
 
