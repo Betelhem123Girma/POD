@@ -1,7 +1,8 @@
 var menuItemDal=require('../dal/menuItem')
-
+var menuItemModel=require('../model/menuItem')
 var result=require('../util/res')
 var events=require('events')
+
 // Get Serach options
 const searchOptions = require('../lib/search_options');
 
@@ -94,4 +95,30 @@ exports.findMenuItems=(req,res)=>{
     
         workflow.emit('validateSearchQuery');
     };
-//menu item order
+//menu item rate
+var count=1
+exports.rateMenuItem=(req,res,next)=>{
+    count++
+    
+    const rate=req.body.rating
+  
+    // console.log(oldRate)
+    // const newRate=(rate+oldRate)/count
+    
+    menuItemModel.findByIdAndUpdate(req.body.menuItemId, {rating:rate}, function (err, menuItem) {
+        if (err) return next(err);
+        res.send('menuItem udpated.');
+    });
+}
+    // menuItemModel.findOneAndUpdate({_id: req.body.menuItemId}, {$push: {rating: rate}},
+    //     (err,menuItems)=>
+    // {
+    //     if(err){
+    //         console.log('Error occurred')
+    //     }
+    //     else{
+    //         console.log(menuItems)
+    //     }
+    // }
+    // )
+    // menuItemModel.update({_id:"req.body.menuItemId"},{$push:{rate:{rate}}})

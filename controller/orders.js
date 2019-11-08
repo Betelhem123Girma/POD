@@ -6,29 +6,24 @@ const validator=require('../validator/validator')
 var result=require('../util/res')
 const orderModel=require('../model/order')
    exports.findOrder=(req,res)=>{
-    userDal.findById(req.body.userId)
+    userDal.findById(req.params.userId)
     .then(found=>{
         if(!found){
             return res.status(404).json({
                 message:"user not found"
             })
         }
-        // return userDal.findAllergies(req.body.userId)
+       
     }
         )
-     orderDal.findByUserId({user:req.params.userId})
-     .then(found=>{
-       if(!found){
-          return res.status(404).json({
-            message:"order not found"
-          })
-       }
-       else{
-         order=found
-         res.json(order)
-       }
-
-     })
+    orderModel.where('user', req.params.userId).find().then(function (menuItems) {
+          //res.send(friends);
+          res.json(menuItems); // works
+         
+  
+      });
+    
+    
    }   
     exports.findOrders=(req,res)=>{
     
@@ -76,7 +71,7 @@ const orderModel=require('../model/order')
                 _id: result._id,
                 menuItems: result.menuItems,
                 quantity: result.quantity,
-                allergies:result.allergies
+                user:result.user
 
               }
             });

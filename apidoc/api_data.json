@@ -6,6 +6,24 @@
     "name": "AddMenuItems",
     "group": "MenuItems",
     "version": "0.0.1",
+    "success": {
+      "examples": [
+        {
+          "title": "Success Response",
+          "content": "{\n    \"ingredient\": [],\n    \"rating\": 3,\n    \"payed\": false,\n    \"date_created\": \"2019-11-08T05:35:17.300Z\",\n    \"date_modified\": \"2019-11-08T05:35:17.300Z\",\n    \"_id\": \"5dc4fe955a98e200242666f1\",\n    \"menuItem_name\": \"Black forest\",\n    \"price\": 50,\n    \"description\": \"This is a nice dessert\",\n    \"catagory\": \"Dessert\",\n    \"__v\": 0\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "parameter": {
+      "examples": [
+        {
+          "title": "Request",
+          "content": "{\n\"menuItem_name\":\"Black forest\",\n\"price\":50,\n\"ingredient\":[],\n\"rating\":3,\n\"description\":\"This is a nice dessert\",\n\"catagory\":\"Dessert\"\n}",
+          "type": "json"
+        }
+      ]
+    },
     "filename": "routes/menuItem.js",
     "groupTitle": "MenuItems"
   },
@@ -14,6 +32,25 @@
     "url": "/pod/menuItems",
     "title": "Get all menuItem with specific catagory",
     "name": "GetMenuItems",
+    "group": "MenuItems",
+    "version": "0.0.1",
+    "parameter": {
+      "examples": [
+        {
+          "title": "Request",
+          "content": "{\n\n\"catagory\":\"Dessert\"\n}\n    {\n        \"ingredient\": [],\n        \"rating\": null,\n        \"payed\": false,\n        \"date_created\": \"2019-11-07T23:18:45.871Z\",\n        \"date_modified\": \"2019-11-07T23:18:45.871Z\",\n        \"_id\": \"5dc4a6551bdd5a00241e1018\",\n        \"menuItem_name\": \"Black forest\",\n        \"price\": 50,\n        \"description\": \"This is a nice dessert\",\n        \"catagory\": \"Dessert\",\n        \"__v\": 0\n    }",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "routes/menuItem.js",
+    "groupTitle": "MenuItems"
+  },
+  {
+    "type": "patch",
+    "url": "/pod/rate",
+    "title": "Rate menuItem",
+    "name": "RateMenuItems",
     "group": "MenuItems",
     "version": "0.0.1",
     "filename": "routes/menuItem.js",
@@ -30,7 +67,7 @@
     "groupTitle": "MenuItems"
   },
   {
-    "type": "user",
+    "type": "post",
     "url": "/orders/add",
     "title": "Add orders",
     "name": "AddOrders",
@@ -46,16 +83,62 @@
     "name": "DeleteOrder",
     "group": "Order",
     "version": "0.0.1",
+    "success": {
+      "examples": [
+        {
+          "title": "Success Response",
+          "content": "{\n    \"message\": \"Order deleted\",\n    \"request\": {\n        \"type\": \"POST\",\n        \"url\": \"http://localhost:3000/orders\",\n        \"body\": {\n            \"productId\": \"ID\",\n            \"quantity\": \"Number\"\n        }\n    }\n}",
+          "type": "json"
+        }
+      ]
+    },
     "filename": "routes/order.js",
     "groupTitle": "Order"
   },
   {
-    "type": "user",
+    "type": "get",
     "url": "/orders/",
     "title": "Get all orders",
     "name": "GetOrders",
     "group": "Order",
     "version": "0.0.1",
+    "parameter": {
+      "examples": [
+        {
+          "title": "Request",
+          "content": "{\n\n\"userId\":\"5dc43d0f4856e30024bf8983\",\n\"menuItemId\":[\"5dc4a6551bdd5a00241e1018\"],\n\"order_name\":\"Bety order\",\n\"order_quantity\":2\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success Response",
+          "content": "{\n    \"message\": \"Order stored\",\n    \"createdOrder\": {\n        \"_id\": \"5dc502cc5a98e200242666f2\",\n        \"menuItems\": [\n            \"5dc4a6551bdd5a00241e1018\"\n        ]\n    }\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "routes/order.js",
+    "groupTitle": "Order"
+  },
+  {
+    "type": "get",
+    "url": "/orders/",
+    "title": "Get all orders",
+    "name": "GetOrders",
+    "group": "Order",
+    "version": "0.0.1",
+    "success": {
+      "examples": [
+        {
+          "title": "Success Response",
+          "content": " {\n    \"message\": \"Order stored\",\n    \"createdOrder\": {\n        \"_id\": \"5dc502cc5a98e200242666f2\",\n        \"menuItems\": [\n            \"5dc4a6551bdd5a00241e1018\"\n        ]\n    }\n}",
+          "type": "json"
+        }
+      ]
+    },
     "filename": "routes/order.js",
     "groupTitle": "Order"
   },

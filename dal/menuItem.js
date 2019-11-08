@@ -35,4 +35,4 @@ exports.create = function create(menuItemData, cb) {
             return cb(null, foods);
         })
 }
-exports.orderMenuItem=()=>{}
+exports.find=query=>menuItemModel.find(query)
