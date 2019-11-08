@@ -16,7 +16,7 @@ const orderModel=require('../model/order')
         // return userDal.findAllergies(req.body.userId)
     }
         )
-     orderDal.findById({user:req.params.userId})
+     orderDal.findByUserId({user:req.params.userId})
      .then(found=>{
        if(!found){
           return res.status(404).json({
