@@ -1,0 +1,412 @@
+{
+	"info": {
+		"_postman_id": "5ae18b70-0bdc-49e1-b6b8-bd4ea4e791bc",
+		"name": "thePod",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Login User",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImJldHlAZ21haWwuY29tIiwidXNlcklkIjoiNWRjMDE4NWI3NjY2ZGIzYjg4ZTQ2ZDJhIiwiaWF0IjoxNTcyODczNjgzLCJleHAiOjE1NzI4NzcyODN9.MdXa6Ej6348O93GNS9dHnb510R2gvrbechgSx29SMdU",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\n\t\"email\":\"bety@gmail.com\",\n\t\"password\":\"bety\"\n}"
+				},
+				"url": {
+					"raw": "http://the-pod.herokuapp.com/users/login",
+					"protocol": "http",
+					"host": [
+						"the-pod",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"users",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Account",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\"first_name\":\"Samrawit\",\n\"last_name\":\"getachew\",\n\"email\":\"djkhjk\",\n\"password\":\"samrawit\",\n\"allergies\":[\"diary\"]\n}"
+				},
+				"url": {
+					"raw": "https://the-pod.herokuapp.com/users/createAccount",
+					"protocol": "https",
+					"host": [
+						"the-pod",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"users",
+						"createAccount"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Adding menuItem",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\"menuItem_name\":\"wine\",\n\"price\":150,\n\"ingredient\":[],\n\"rating\":4,\n\"description\":\"This is ethiopian made\",\n\"catagory\":\"drink\"\n}"
+				},
+				"url": {
+					"raw": "https://the-pod.herokuapp.com/pod/addMenuItems",
+					"protocol": "https",
+					"host": [
+						"the-pod",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"pod",
+						"addMenuItems"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get MenuItem With catagory",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\n\"catagory\":\"drink\"\n}"
+				},
+				"url": {
+					"raw": "https://the-pod.herokuapp.com/pod/menuItems",
+					"protocol": "https",
+					"host": [
+						"the-pod",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"pod",
+						"menuItems"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Search for menuItem",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE1NzMxMDE0NTQsImV4cCI6MTU3MzEwNTA1NH0.TypmRDjsW703-6hyKFLzBFuNIWT5O6SZ-S2bNfSu-vQ",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\n\"menuItem_name\":\"pizza\"\n}"
+				},
+				"url": {
+					"raw": "https:/the-pod.herokuapp.com/pod/searchMenuItem",
+					"host": [
+						"https:"
+					],
+					"port": "",
+					"path": [
+						"the-pod.herokuapp.com",
+						"pod",
+						"searchMenuItem"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add order",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFsZW1AZ21haWwuY29tIiwidXNlcklkIjoiNWRjNDNkMGY0ODU2ZTMwMDI0YmY4OTgzIiwiaWF0IjoxNTczMTczMDE1LCJleHAiOjE1NzMxNzY2MTV9.heFZgvjuzwcSj3yO2JLnGk3CXtX1cHOE0d8ey1BWijY",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\n\"userId\":\"5dc4baf901da980024ec2d77\",\n\"menuItemId\":[\"5dc4a6551bdd5a00241e1018\"],\n\"order_name\":\"Bety order\",\n\"order_quantity\":2\n}"
+				},
+				"url": {
+					"raw": "https://the-pod.herokuapp.com/orders/add",
+					"protocol": "https",
+					"host": [
+						"the-pod",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"orders",
+						"add"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Find orders",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFsZW1AZ21haWwuY29tIiwidXNlcklkIjoiNWRjNDNkMGY0ODU2ZTMwMDI0YmY4OTgzIiwiaWF0IjoxNTczMTY5MDg2LCJleHAiOjE1NzMxNzI2ODZ9.zZXVN2zXc9IQIpsiVgbY1ppKLxGVLYF_cB2-cd4VcA4",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\n\"userId\":\"5dc43d0f4856e30024bf8983\",\n\"menuItemId\":[\"5dc4a6551bdd5a00241e1018\"],\n\"order_name\":\"Bety order\",\n\"order_quantity\":2\n}"
+				},
+				"url": {
+					"raw": "https://the-pod.herokuapp.com/orders/",
+					"protocol": "https",
+					"host": [
+						"the-pod",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"orders",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Deleting a specific Order",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFsZW1AZ21haWwuY29tIiwidXNlcklkIjoiNWRjNDNkMGY0ODU2ZTMwMDI0YmY4OTgzIiwiaWF0IjoxNTczMTY5MDg2LCJleHAiOjE1NzMxNzI2ODZ9.zZXVN2zXc9IQIpsiVgbY1ppKLxGVLYF_cB2-cd4VcA4",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://the-pod.herokuapp.com/orders/delete/5dc4ab825670410024c06a43",
+					"protocol": "https",
+					"host": [
+						"the-pod",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"orders",
+						"delete",
+						"5dc4ab825670410024c06a43"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Find order of user",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFsZW1AZ21haWwuY29tIiwidXNlcklkIjoiNWRjNDNkMGY0ODU2ZTMwMDI0YmY4OTgzIiwiaWF0IjoxNTczMTY5MDg2LCJleHAiOjE1NzMxNzI2ODZ9.zZXVN2zXc9IQIpsiVgbY1ppKLxGVLYF_cB2-cd4VcA4",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://the-pod.herokuapp.com/orders/find/5dc43d0f4856e30024bf8983",
+					"protocol": "https",
+					"host": [
+						"the-pod",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"orders",
+						"find",
+						"5dc43d0f4856e30024bf8983"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Rate menuItem",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFsZW1AZ21haWwuY29tIiwidXNlcklkIjoiNWRjNDNkMGY0ODU2ZTMwMDI0YmY4OTgzIiwiaWF0IjoxNTczMTczMDE1LCJleHAiOjE1NzMxNzY2MTV9.heFZgvjuzwcSj3yO2JLnGk3CXtX1cHOE0d8ey1BWijY",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"menuItemId\":\"5dc4a6551bdd5a00241e1018\",\n\t\"rate\":\"3\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:3000/orders/pod/rate",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"orders",
+						"pod",
+						"rate"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
